@@ -1,0 +1,94 @@
+div.oshirase {
+  margin: 10px 0;
+  font-size: 100%;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+div.oshirase a {
+  padding: 7px 0;
+  display: block;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+div.oshirase a:hover {
+  background-color: #f5f5f5;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+div.oshirase hr {
+  margin: 0;
+  padding: 0;
+}
+
+div.oshirase .newmark {
+  font-size: 74%;
+  padding: 1px 5px;
+  vertical-align: middle;
+  color: white;
+  background-color: #ff4500;
+  border-radius: 3px;
+}
+
+div.oshirase dl {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+div.oshirase dt {
+  margin: 0 0 0 0.3em;
+  padding: 0;
+  border: 0;
+  color: gray;
+  font-weight: normal;
+  white-space: nowrap;
+}
+
+div.oshirase dd {
+  margin: 0;
+  padding: 0 2px;
+}
+
+@media screen and (min-width: 600px) {
+  div.oshirase dl {
+    overflow: hidden;
+  }
+  div.oshirase dt {
+    float: left;
+    width: 8.1em;
+    overflow: hidden;
+  }
+  div.oshirase dd {
+    overflow: hidden;
+  }
+}
+
+/* ページネーション */
+.oshirase-pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: 90%;
+}
+
+.oshirase-pagination a {
+  text-decoration: none;
+  padding: 4px 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: inherit;
+  box-shadow: none;
+}
+
+.oshirase-pagination a:hover {
+  background-color: #f5f5f5;
+  box-shadow: none;
+}
+
+.oshirase-page-info {
+  color: gray;
+}

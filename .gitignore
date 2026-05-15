@@ -1,0 +1,17 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# エディタ
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# WordPress
+wp-config.php
+wp-content/uploads/
+
+# 配布用ZIPの作業ファイル
+*.zip
