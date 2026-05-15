@@ -21,11 +21,11 @@
 
 /*
  Plugin Name: シンプルおしらせ
- Plugin URI: http://residentbird.main.jp/bizplugin/
- Description: 新着情報(おしらせ)を指定した固定ページや投稿にショートコードで表示するプラグインです。
+ Plugin URI: https://github.com/recolon32
+ Description: 新着情報(おしらせ・What's New)を指定した固定ページや投稿にショートコードで表示するプラグインです。What's New Generator by バージョン 2.0.2 | 作者: Hideki Tanakaさんのものをオマージュして新しいWordpress用にコードを直したものです。
  Version: 1.0.0
- Author: Hideki Tanaka
- Author URI: http://residentbird.main.jp/bizplugin/
+ Author: sato32, Claude (Anthropic)
+ Author URI: https://github.com/recolon32
  Text Domain: simple-oshirase
 */
 
@@ -43,7 +43,8 @@ class SOS {
 	const SHORTCODE_COMPAT = 'showwhatsnew';
 
 	public static function get_option() {
-		return get_option( self::OPTIONS );
+		$options = get_option( self::OPTIONS );
+		return is_array($options) ? $options : array();
 	}
 
 	public static function update_option( $options ) {
@@ -118,8 +119,12 @@ class SimpleOshirase {
 			'シンプルおしらせ 設定',
 			'manage_options',
 			__FILE__,
-			array($this->adminUi, 'show_admin_page')
+			array($this, 'dispatch_admin_page')
 		);
+	}
+
+	public function dispatch_admin_page() {
+		$this->adminUi->show_admin_page();
 	}
 
 	public function on_enqueue_css_js() {
@@ -158,7 +163,7 @@ class OshiraseInfo {
 	public function __construct() {
 		$options = SOS::get_option();
 
-		$this->title = esc_html( $options['sos_title'] );
+		$this->title = esc_html( $options['sos_title'] ?? 'お知らせ' );
 
 		$title_tag       = isset($options['sos_title_tag']) ? $options['sos_title_tag'] : 'h2';
 		$this->title_tag = in_array($title_tag, self::$allowed_title_tags, true) ? $title_tag : 'h2';
@@ -178,7 +183,7 @@ class OshiraseInfo {
 			? $options['sos_orderby'] : '公開日順';
 		$orderby = ( $orderby_opt === '公開日順' ) ? 'date' : 'modified';
 
-		$per_page              = absint($options['sos_number']);
+		$per_page              = absint($options['sos_number'] ?? 10);
 		$this->pagination_enabled = ! empty($options['sos_pagination']);
 
 		if ( $this->pagination_enabled ) {
@@ -192,7 +197,7 @@ class OshiraseInfo {
 			'paged'          => $this->current_page,
 			'order'          => 'DESC',
 			'orderby'        => $orderby,
-			'category_name'  => sanitize_text_field($options['sos_category_name']),
+			'category_name'  => sanitize_text_field($options['sos_category_name'] ?? ''),
 			'post_status'    => 'publish',
 		);
 
