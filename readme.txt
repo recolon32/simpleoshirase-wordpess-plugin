@@ -1,6 +1,6 @@
 === Oshirase Ichiran ===
 Contributors: sato32
-Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin/simpleoshirase-wordpess-plugin
+Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin
 Tags: shortcode, news, widget, posts
 Requires at least: 5.3
 Tested up to: 7.0
