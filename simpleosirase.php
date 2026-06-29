@@ -21,7 +21,7 @@
 
 /*
  Plugin Name: Simple Oshirase
- Plugin URI: https://github.com/recolon32
+ Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin
  Description: 新着情報(おしらせ・What's New)を指定した固定ページや投稿にショートコードで表示するプラグインです。What's New Generator by バージョン 2.0.2 | 作者: Hideki Tanakaさんのものをオマージュして新しいWordpress用にコードを直したものです。
  Version: 1.0.0
  Author: sato32, Claude (Anthropic)
