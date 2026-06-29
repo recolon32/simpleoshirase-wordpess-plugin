@@ -3,7 +3,7 @@ Contributors: sato32
 Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin/simpleoshirase-wordpess-plugin
 Tags: shortcode, news, widget, posts
 Requires at least: 5.3
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 7.0
 Stable tag: 1.0.0
 License: GPLv2 or later

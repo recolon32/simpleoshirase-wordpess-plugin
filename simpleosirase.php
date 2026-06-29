@@ -26,6 +26,8 @@
  Version: 1.0.0
  Author: sato32, Claude (Anthropic)
  Author URI: https://github.com/recolon32
+ License: GPLv2 or later
+ License URI: https://www.gnu.org/licenses/gpl-2.0.html
  Text Domain: simple-oshirase
 */
 
@@ -37,9 +39,10 @@ include_once( dirname(__FILE__) . '/simpleosirase-admin-ui.php' );
 new SimpleOshirase();
 
 class SOS {
-	const VERSION        = '1.0.0';
-	const OPTIONS        = 'simple_oshirase_options';
-	const SHORTCODE_NEW  = 'shirase';
+	const VERSION          = '1.0.0';
+	const OPTIONS          = 'simple_oshirase_options';
+	const PAGE_SLUG        = 'simple-oshirase';
+	const SHORTCODE_NEW    = 'shirase';
 	const SHORTCODE_COMPAT = 'showwhatsnew';
 
 	public static function get_option() {
@@ -110,12 +113,11 @@ class SimpleOshirase {
 	}
 
 	public function on_admin_init() {
-		$this->adminUi = new SOSAdminUi( __FILE__ );
+		$this->adminUi = new SOSAdminUi( SOS::PAGE_SLUG );
 	}
 
 	public function on_admin_enqueue_css_js( $hook ) {
-		// プラグインの設定ページのみCSSを読み込む
-		if ( strpos($hook, 'simple-oshirase') === false && strpos($hook, basename(__FILE__, '.php')) === false ) {
+		if ( 'settings_page_' . SOS::PAGE_SLUG !== $hook ) {
 			return;
 		}
 		SOS::enqueue_admin_css_js();
@@ -123,10 +125,10 @@ class SimpleOshirase {
 
 	public function on_admin_menu() {
 		add_options_page(
-			'シンプルおしらせ 設定',
-			'シンプルおしらせ 設定',
+			'Simple Oshirase 設定',
+			'Simple Oshirase 設定',
 			'manage_options',
-			__FILE__,
+			SOS::PAGE_SLUG,
 			array($this, 'dispatch_admin_page')
 		);
 	}
