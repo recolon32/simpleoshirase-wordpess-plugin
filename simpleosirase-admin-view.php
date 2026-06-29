@@ -1,5 +1,6 @@
+<?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <div class="wrap">
-	<h1>シンプルおしらせ 設定</h1>
+	<h1>Simple Oshirase 設定</h1>
 
 	<?php if ( $compat_mode ) : ?>
 	<div class="notice notice-warning">
@@ -22,7 +23,7 @@
 		<?php settings_fields( $option_name ); ?>
 		<?php do_settings_sections( $file ); ?>
 		<p class="submit">
-			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes'); ?>" />
+			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'simple-oshirase' ); ?>" />
 		</p>
 	</form>
 

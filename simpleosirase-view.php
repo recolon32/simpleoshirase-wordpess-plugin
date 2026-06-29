@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) { exit; } ?>
 <div class="oshirase">
 	<?php if ( $info->title ) : ?>
 		<?php echo '<' . esc_attr($info->title_tag) . '>' . esc_html($info->title) . '</' . esc_attr($info->title_tag) . '>'; ?>

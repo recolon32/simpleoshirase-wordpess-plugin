@@ -133,15 +133,13 @@ class SOSAdminUi {
 
 	public function setting_latest_new() {
 		$options = SOS::get_option();
-		$checked = ( ! empty($options['sos_latest_new']) ) ? ' checked="checked"' : '';
-		echo '<input id="sos_latest_new" name="simple_oshirase_options[sos_latest_new]" type="checkbox" value="1"' . $checked . ' />';
+		echo '<input id="sos_latest_new" name="simple_oshirase_options[sos_latest_new]" type="checkbox" value="1"' . checked( ! empty($options['sos_latest_new']), true, false ) . ' />';
 		echo '<label for="sos_latest_new"> 最新の1件にNEW!マークをつける</label>';
 	}
 
 	public function setting_pagination() {
 		$options = SOS::get_option();
-		$checked = ( ! empty($options['sos_pagination']) ) ? ' checked="checked"' : '';
-		echo '<input id="sos_pagination" name="simple_oshirase_options[sos_pagination]" type="checkbox" value="1"' . $checked . ' />';
+		echo '<input id="sos_pagination" name="simple_oshirase_options[sos_pagination]" type="checkbox" value="1"' . checked( ! empty($options['sos_pagination']), true, false ) . ' />';
 		echo '<label for="sos_pagination"> 「前へ / 次へ」ボタンを表示する</label>';
 	}
 
