@@ -1,4 +1,4 @@
-=== Simple Oshirase ===
+=== Oshirase Ichiran ===
 Contributors: sato32
 Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin/simpleoshirase-wordpess-plugin
 Tags: shortcode, news, widget, posts
@@ -13,9 +13,9 @@ Display a news/notice list anywhere on your site using a simple shortcode. Desig
 
 == Description ==
 
-**Simple Oshirase** (シンプルおしらせ) displays a list of recent posts or pages anywhere on your WordPress site using a single shortcode.
+**Oshirase Ichiran** (おしらせ一覧) displays a list of recent posts or pages anywhere on your WordPress site using a single shortcode.
 
-Place `[shirase]` in any page, post, or text widget to show your latest news automatically.
+お知らせを一覧でシンプルに並べるプラグインです。`[shirase]` をページや投稿に貼り付けるだけで新着情報を自動表示します。
 
 This plugin is an homage to the original "What's New Generator" by Hideki Tanaka, rewritten for modern WordPress with security updates and new features.
 

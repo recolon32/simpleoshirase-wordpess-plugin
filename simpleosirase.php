@@ -20,15 +20,15 @@
  */
 
 /*
- Plugin Name: Simple Oshirase
+ Plugin Name: Oshirase Ichiran
  Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin
- Description: 新着情報(おしらせ・What's New)を指定した固定ページや投稿にショートコードで表示するプラグインです。What's New Generator by バージョン 2.0.2 | 作者: Hideki Tanakaさんのものをオマージュして新しいWordpress用にコードを直したものです。
+ Description: お知らせを一覧でシンプルに並べるプラグインです。ショートコードで固定ページや投稿に新着情報を表示します。What's New Generator (v2.0.2 by Hideki Tanaka) へのオマージュとして書き直しました。
  Version: 1.0.0
  Author: sato32, Claude (Anthropic)
  Author URI: https://github.com/recolon32
  License: GPLv2 or later
  License URI: https://www.gnu.org/licenses/gpl-2.0.html
- Text Domain: simple-oshirase
+ Text Domain: oshirase-ichiran
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -41,7 +41,7 @@ new SimpleOshirase();
 class SOS {
 	const VERSION          = '1.0.0';
 	const OPTIONS          = 'simple_oshirase_options';
-	const PAGE_SLUG        = 'simple-oshirase';
+	const PAGE_SLUG        = 'oshirase-ichiran';
 	const SHORTCODE_NEW    = 'shirase';
 	const SHORTCODE_COMPAT = 'showwhatsnew';
 
@@ -125,8 +125,8 @@ class SimpleOshirase {
 
 	public function on_admin_menu() {
 		add_options_page(
-			'Simple Oshirase 設定',
-			'Simple Oshirase 設定',
+			'Oshirase Ichiran 設定',
+			'Oshirase Ichiran 設定',
 			'manage_options',
 			SOS::PAGE_SLUG,
 			array($this, 'dispatch_admin_page')
