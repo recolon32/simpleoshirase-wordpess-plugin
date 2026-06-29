@@ -29,7 +29,7 @@ class SOSAdminUi {
 
 	public function show_admin_page() {
 		if ( ! current_user_can('manage_options') ) {
-			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'oshirase-ichiran' ) );
+			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'simple-oshirase' ) );
 		}
 		$file        = $this->file_path;
 		$option_name = SOS::OPTIONS;

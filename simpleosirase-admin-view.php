@@ -23,7 +23,7 @@
 		<?php settings_fields( $option_name ); ?>
 		<?php do_settings_sections( $file ); ?>
 		<p class="submit">
-			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'oshirase-ichiran' ); ?>" />
+			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes', 'simple-oshirase' ); ?>" />
 		</p>
 	</form>
 

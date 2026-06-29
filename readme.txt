@@ -54,7 +54,7 @@ This plugin is an homage to the original "What's New Generator" by Hideki Tanaka
 
 == Installation ==
 
-1. Upload the `simpleoshirase-wordpess-plugin` folder to `/wp-content/plugins/`
+1. Upload the `simple-oshirase` folder to `/wp-content/plugins/`
 2. Activate the plugin from the WordPress admin "Plugins" menu
 3. Go to "Settings" → "シンプルおしらせ 設定" to configure
 4. Add `[shirase]` to any page or post where you want to display the notice list
