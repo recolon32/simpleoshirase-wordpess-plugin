@@ -76,9 +76,10 @@ class SimpleOshirase {
 
 	public function __construct() {
 		register_activation_hook( __FILE__, array($this, 'on_activation') );
-		add_action( 'admin_init',        array($this, 'on_admin_init') );
-		add_action( 'admin_menu',        array($this, 'on_admin_menu') );
-		add_action( 'wp_enqueue_scripts',array($this, 'on_enqueue_css_js') );
+		add_action( 'admin_init',             array($this, 'on_admin_init') );
+		add_action( 'admin_menu',             array($this, 'on_admin_menu') );
+		add_action( 'admin_enqueue_scripts',  array($this, 'on_admin_enqueue_css_js') );
+		add_action( 'wp_enqueue_scripts',     array($this, 'on_enqueue_css_js') );
 		add_shortcode( SOS::get_active_shortcode(), array($this, 'show_shortcode') );
 		add_filter( 'widget_text', 'do_shortcode' );
 	}
@@ -109,8 +110,15 @@ class SimpleOshirase {
 	}
 
 	public function on_admin_init() {
-		SOS::enqueue_admin_css_js();
 		$this->adminUi = new SOSAdminUi( __FILE__ );
+	}
+
+	public function on_admin_enqueue_css_js( $hook ) {
+		// プラグインの設定ページのみCSSを読み込む
+		if ( strpos($hook, 'simple-oshirase') === false && strpos($hook, basename(__FILE__, '.php')) === false ) {
+			return;
+		}
+		SOS::enqueue_admin_css_js();
 	}
 
 	public function on_admin_menu() {

@@ -1,7 +1,7 @@
-=== シンプルおしらせ (Simple Oshirase) ===
-Contributors: sato32, claude-ai
-Plugin URI: https://github.com/recolon32
-Tags: oshirase, what's new, shortcode, news, 新着情報
+=== Simple Oshirase - お知らせ表示 ===
+Contributors: sato32
+Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin
+Tags: shortcode, news, widget, posts
 Requires at least: 5.3
 Tested up to: 6.8
 Requires PHP: 7.0
@@ -9,80 +9,90 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-ショートコードひとつで、投稿・固定ページ・ウィジェットにおしらせ一覧を表示するシンプルなプラグインです。
+Display a news/notice list anywhere on your site using a simple shortcode. Designed for Japanese WordPress sites.
 
 == Description ==
 
-シンプルおしらせは、What's New Generator へのオマージュとして生まれたプラグインです。
+**Simple Oshirase** (シンプルおしらせ) displays a list of recent posts or pages anywhere on your WordPress site using a single shortcode.
 
-あのプラグインが大切にしたシンプルさを受け継ぎながら、現代のWordPressの作法（セキュリティ・コーディング規約）に合わせて書き直しました。
+Place `[shirase]` in any page, post, or text widget to show your latest news automatically.
 
-おしらせの日付とタイトルは自動的に表示され、タイトルをクリックすると該当の記事が開きます。
+This plugin is an homage to the original "What's New Generator" by Hideki Tanaka, rewritten for modern WordPress with security updates and new features.
+
+= Features =
+
+* Display a news list anywhere with the `[shirase]` shortcode
+* Show a NEW! badge for recent posts (customizable time period)
+* Optionally mark the latest post with a NEW! badge automatically
+* Choose content type: Posts, Pages, or both
+* Sort by published date or last modified date
+* Filter by category slug (Posts only)
+* Optional "Prev / Next" pagination (on/off toggle)
+* Compatible shortcode `[showwhatsnew]` for migration from What's New Generator
+* Live preview in the admin settings page
+
+---
+
+シンプルおしらせは、ショートコードひとつでサイトのどこにでもおしらせ一覧を表示できるプラグインです。
 
 = 特徴 =
 
-* ショートコード `[shirase]` を貼り付けるだけで、どのページにもおしらせ一覧を表示できます
-* 期間を指定してタイトルに NEW! マークを表示できます
-* 最新記事だけに NEW! マークをつける機能があります
-* 表示するコンテンツを「投稿」「固定ページ」「投稿＋固定ページ」から選べます
-* 表示順序は公開日順・更新日順から選択できます
-* カテゴリのスラッグを指定して、特定カテゴリの記事だけを表示できます（投稿のみ）
-* 「前へ / 次へ」ページネーションのON/OFFが設定できます
-* 旧プラグイン（What's New Generator）との互換ショートコード `[showwhatsnew]` に切り替えられます
-* 管理画面でプレビューを確認しながら設定できます
+* `[shirase]` を貼り付けるだけでおしらせ一覧を表示
+* NEW! マークの期間指定・最新記事への自動付与
+* 表示コンテンツを「投稿」「固定ページ」「投稿＋固定ページ」から選択
+* 表示順序：公開日順 / 更新日順
+* カテゴリのスラッグ指定で絞り込み（投稿のみ）
+* 「前へ / 次へ」ページネーション（ON/OFF）
+* What's New Generator からの移行用互換ショートコード `[showwhatsnew]`
+* 管理画面でリアルタイムプレビュー
 
-= What's New Generator との互換性について =
+= What's New Generator との互換性 =
 
-本プラグインは What's New Generator とは独立したプラグインです。
-設定（オプション）はリセットされ、新規インストール扱いになります。
+本プラグインは What's New Generator とは独立したプラグインです。設定は引き継がれません。
 
-`[showwhatsnew]` ショートコードの互換モードを利用する場合は、
-**必ず What's New Generator プラグインを先に無効化**してください。
-同時に有効にするとショートコードが衝突します。
+`[showwhatsnew]` 互換モードを使う場合は、**必ず What's New Generator を先に無効化**してください。同時に有効にするとショートコードが衝突します。
 
 == Installation ==
 
-1. `shirase` フォルダごと `/wp-content/plugins/` にアップロードします
-2. WordPress 管理画面の「プラグイン」メニューから「シンプルおしらせ」を有効化します
-3. 「設定」→「シンプルおしらせ 設定」で各項目を設定します
-4. おしらせを表示したい固定ページや投稿の本文に `[shirase]` を貼り付けます
+1. Upload the `simpleoshirase-wordpess-plugin` folder to `/wp-content/plugins/`
+2. Activate the plugin from the WordPress admin "Plugins" menu
+3. Go to "Settings" → "シンプルおしらせ 設定" to configure
+4. Add `[shirase]` to any page or post where you want to display the notice list
 
 == Frequently Asked Questions ==
 
-= 旧プラグインの設定を引き継げますか？ =
+= Can I migrate settings from What's New Generator? =
 
-引き継ぎません。シンプルおしらせは独自の設定（`simple_oshirase_options`）を使用します。
-有効化後、設定画面で改めてご設定ください。
+No. Simple Oshirase uses its own option key (`simple_oshirase_options`). Please reconfigure after activation.
 
-= `[showwhatsnew]` のまま使い続けたい =
+= Can I keep using `[showwhatsnew]`? =
 
-設定画面の「使用するショートコード」で `[showwhatsnew]`（旧互換）を選択できます。
-ただし What's New Generator を先に無効化してください。
+Yes. In the settings page, switch the shortcode to `[showwhatsnew]` (legacy mode). Make sure to deactivate What's New Generator first to avoid conflicts.
 
-= ウィジェットでも使えますか？ =
+= Does it work in widgets? =
 
-はい。テキストウィジェットに `[shirase]` を貼り付けることで表示できます。
+Yes. Paste `[shirase]` into a Text widget and it will display correctly.
 
-== Screenshots ==
+= What languages is the admin UI in? =
 
-1. おしらせ一覧の表示例
-2. 管理画面の設定ページ
+The admin settings page is currently in Japanese only. English localization is planned for a future release.
 
 == Changelog ==
 
 = 1.0.0 =
-* 初版リリース
-* What's New Generator（v2.0.2）へのオマージュとして全面書き直し
-* セキュリティアップデート：全出力に esc_html / esc_attr / esc_url を適用
-* 入力値の許可リストバリデーションを追加
-* 権限チェックを manage_options に変更
-* get_posts() から WP_Query に移行
-* date() を WordPress 標準の wp_date() に変更
-* 「前へ / 次へ」ページネーション機能を追加（ON/OFF切替）
-* 互換ショートコード [showwhatsnew] の選択機能と競合警告を追加
-* PHP 4 時代の var キーワード・参照渡しコールバックを廃止
+* Initial release
+* Homage to What's New Generator (v2.0.2) by Hideki Tanaka — fully rewritten for modern WordPress
+* Security: applied esc_html / esc_attr / esc_url to all output
+* Security: added allowlist validation for all settings
+* Security: changed capability check to manage_options
+* Replaced get_posts() with WP_Query for better pagination support
+* Replaced date() with WordPress-native wp_date()
+* Added "Prev / Next" pagination with on/off toggle
+* Added legacy shortcode [showwhatsnew] selector with conflict warning
+* Removed PHP 4-era var keyword and pass-by-reference callbacks
+* Added uninstall.php for clean database removal
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-What's New Generator からの移行の場合、設定の自動引き継ぎはありません。有効化後に設定画面から再設定してください。
+Initial release. If migrating from What's New Generator, settings will not be carried over — please reconfigure after activation.
