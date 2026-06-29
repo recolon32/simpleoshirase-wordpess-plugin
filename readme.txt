@@ -1,4 +1,4 @@
-=== Simple Oshirase - お知らせ表示 ===
+=== Simple Oshirase ===
 Contributors: sato32
 Plugin URI: https://github.com/recolon32/simpleoshirase-wordpess-plugin
 Tags: shortcode, news, widget, posts
