@@ -36,11 +36,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 include_once( dirname(__FILE__) . '/simpleosirase-admin-ui.php' );
-new SimpleOshirase();
+new OSHIIC_Plugin();
 
-class SOS {
+class OSHIIC {
 	const VERSION          = '1.0.0';
-	const OPTIONS          = 'simple_oshirase_options';
+	const OPTIONS          = 'oshiic_options';
 	const PAGE_SLUG        = 'oshirase-ichiran';
 	const SHORTCODE_NEW    = 'shirase';
 	const SHORTCODE_COMPAT = 'showwhatsnew';
@@ -73,7 +73,7 @@ class SOS {
 	}
 }
 
-class SimpleOshirase {
+class OSHIIC_Plugin {
 
 	public $adminUi;
 
@@ -83,12 +83,12 @@ class SimpleOshirase {
 		add_action( 'admin_menu',             array($this, 'on_admin_menu') );
 		add_action( 'admin_enqueue_scripts',  array($this, 'on_admin_enqueue_css_js') );
 		add_action( 'wp_enqueue_scripts',     array($this, 'on_enqueue_css_js') );
-		add_shortcode( SOS::get_active_shortcode(), array($this, 'show_shortcode') );
+		add_shortcode( OSHIIC::get_active_shortcode(), array($this, 'show_shortcode') );
 		add_filter( 'widget_text', 'do_shortcode' );
 	}
 
 	public function on_activation() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		if ( empty($options) ) {
 			$options = array();
 		}
@@ -102,25 +102,25 @@ class SimpleOshirase {
 			'sos_number'        => '10',
 			'sos_latest_new'    => false,
 			'sos_pagination'    => false,
-			'sos_shortcode'     => SOS::SHORTCODE_NEW,
+			'sos_shortcode'     => OSHIIC::SHORTCODE_NEW,
 		);
 		foreach ( $defaults as $key => $value ) {
 			if ( ! isset($options[$key]) ) {
 				$options[$key] = $value;
 			}
 		}
-		SOS::update_option( $options );
+		OSHIIC::update_option( $options );
 	}
 
 	public function on_admin_init() {
-		$this->adminUi = new SOSAdminUi( SOS::PAGE_SLUG );
+		$this->adminUi = new OSHIIC_Admin_UI( OSHIIC::PAGE_SLUG );
 	}
 
 	public function on_admin_enqueue_css_js( $hook ) {
-		if ( 'settings_page_' . SOS::PAGE_SLUG !== $hook ) {
+		if ( 'settings_page_' . OSHIIC::PAGE_SLUG !== $hook ) {
 			return;
 		}
-		SOS::enqueue_admin_css_js();
+		OSHIIC::enqueue_admin_css_js();
 	}
 
 	public function on_admin_menu() {
@@ -128,7 +128,7 @@ class SimpleOshirase {
 			'Oshirase Ichiran 設定',
 			'Oshirase Ichiran 設定',
 			'manage_options',
-			SOS::PAGE_SLUG,
+			OSHIIC::PAGE_SLUG,
 			array($this, 'dispatch_admin_page')
 		);
 	}
@@ -141,11 +141,11 @@ class SimpleOshirase {
 		if ( is_admin() ) {
 			return;
 		}
-		SOS::enqueue_css_js();
+		OSHIIC::enqueue_css_js();
 	}
 
 	public function show_oshirase() {
-		$info = new OshiraseInfo();
+		$info = new OSHIIC_Info();
 		include( dirname(__FILE__) . '/simpleosirase-view.php' );
 	}
 
@@ -158,7 +158,7 @@ class SimpleOshirase {
 	}
 }
 
-class OshiraseInfo {
+class OSHIIC_Info {
 	public $title;
 	public $title_tag;
 	public $items          = array();
@@ -171,7 +171,7 @@ class OshiraseInfo {
 	private static $allowed_orderby       = array('公開日順', '更新日順');
 
 	public function __construct() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 
 		$this->title = esc_html( $options['sos_title'] ?? 'お知らせ' );
 
@@ -215,13 +215,13 @@ class OshiraseInfo {
 		$this->total_pages = $this->pagination_enabled ? (int) $query->max_num_pages : 1;
 
 		foreach ( $query->posts as $i => $post ) {
-			$this->items[] = new OshiraseItem($post, $i, $options);
+			$this->items[] = new OSHIIC_Item($post, $i, $options);
 		}
 		wp_reset_postdata();
 	}
 }
 
-class OshiraseItem {
+class OSHIIC_Item {
 	public $date;
 	public $raw_date;
 	public $title;

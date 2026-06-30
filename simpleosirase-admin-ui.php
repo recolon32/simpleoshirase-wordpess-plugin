@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class SOSAdminUi {
+class OSHIIC_Admin_UI {
 	public $file_path;
 
 	public function __construct( $path ) {
@@ -13,7 +13,7 @@ class SOSAdminUi {
 	}
 
 	public function setUi() {
-		register_setting( SOS::OPTIONS, SOS::OPTIONS, array($this, 'validate') );
+		register_setting( OSHIIC::OPTIONS, OSHIIC::OPTIONS, array($this, 'validate') );
 		add_settings_section('main_section', '表示設定', array($this, 'section_text_fn'), $this->file_path);
 		add_settings_field('sos_title',         'タイトル',                     array($this, 'setting_title'),         $this->file_path, 'main_section');
 		add_settings_field('sos_title_tag',     'タイトルのタグ',               array($this, 'setting_title_tag'),     $this->file_path, 'main_section');
@@ -32,12 +32,12 @@ class SOSAdminUi {
 			wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'simple-oshirase' ) );
 		}
 		$file        = $this->file_path;
-		$option_name = SOS::OPTIONS;
-		$options     = SOS::get_option();
-		$shortcode   = '[' . SOS::get_active_shortcode() . ']';
-		$compat_mode = ( isset($options['sos_shortcode']) && $options['sos_shortcode'] === SOS::SHORTCODE_COMPAT );
+		$option_name = OSHIIC::OPTIONS;
+		$options     = OSHIIC::get_option();
+		$shortcode   = '[' . OSHIIC::get_active_shortcode() . ']';
+		$compat_mode = ( isset($options['sos_shortcode']) && $options['sos_shortcode'] === OSHIIC::SHORTCODE_COMPAT );
 		include_once( dirname(__FILE__) . '/simpleosirase-admin-view.php' );
-		$info = new OshiraseInfo();
+		$info = new OSHIIC_Info();
 		include( dirname(__FILE__) . '/simpleosirase-view.php' );
 	}
 
@@ -70,8 +70,8 @@ class SOSAdminUi {
 		$output['sos_latest_new'] = ! empty($input['sos_latest_new']);
 		$output['sos_pagination'] = ! empty($input['sos_pagination']);
 
-		$output['sos_shortcode'] = ( isset($input['sos_shortcode']) && $input['sos_shortcode'] === SOS::SHORTCODE_COMPAT )
-			? SOS::SHORTCODE_COMPAT : SOS::SHORTCODE_NEW;
+		$output['sos_shortcode'] = ( isset($input['sos_shortcode']) && $input['sos_shortcode'] === OSHIIC::SHORTCODE_COMPAT )
+			? OSHIIC::SHORTCODE_COMPAT : OSHIIC::SHORTCODE_NEW;
 
 		return $output;
 	}
@@ -79,16 +79,16 @@ class SOSAdminUi {
 	public function section_text_fn() {}
 
 	public function setting_title() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$value   = isset($options['sos_title']) ? $options['sos_title'] : 'お知らせ';
-		echo '<input id="sos_title" name="simple_oshirase_options[sos_title]" size="40" type="text" value="' . esc_attr($value) . '" />';
+		echo '<input id="sos_title" name="oshiic_options[sos_title]" size="40" type="text" value="' . esc_attr($value) . '" />';
 	}
 
 	public function setting_title_tag() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$current = isset($options['sos_title_tag']) ? $options['sos_title_tag'] : 'h2';
 		$items   = array('h1', 'h2', 'h3', 'h4', 'p');
-		echo '<select id="sos_title_tag" name="simple_oshirase_options[sos_title_tag]">';
+		echo '<select id="sos_title_tag" name="oshiic_options[sos_title_tag]">';
 		foreach ( $items as $item ) {
 			echo '<option value="' . esc_attr($item) . '"' . selected($current, $item, false) . '>' . esc_html($item) . '</option>';
 		}
@@ -96,61 +96,61 @@ class SOSAdminUi {
 	}
 
 	public function setting_content_type() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$current = isset($options['sos_content_type']) ? $options['sos_content_type'] : '投稿';
 		$items   = array('投稿', '固定ページ', '投稿＋固定ページ');
 		foreach ( $items as $item ) {
-			echo '<label><input' . checked($current, $item, false) . ' value="' . esc_attr($item) . '" name="simple_oshirase_options[sos_content_type]" type="radio" /> ' . esc_html($item) . '</label><br />';
+			echo '<label><input' . checked($current, $item, false) . ' value="' . esc_attr($item) . '" name="oshiic_options[sos_content_type]" type="radio" /> ' . esc_html($item) . '</label><br />';
 		}
 	}
 
 	public function setting_category_name() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$value   = isset($options['sos_category_name']) ? $options['sos_category_name'] : '';
-		echo '<input id="sos_category_name" name="simple_oshirase_options[sos_category_name]" size="40" type="text" value="' . esc_attr($value) . '" />';
+		echo '<input id="sos_category_name" name="oshiic_options[sos_category_name]" size="40" type="text" value="' . esc_attr($value) . '" />';
 	}
 
 	public function setting_orderby() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$current = isset($options['sos_orderby']) ? $options['sos_orderby'] : '公開日順';
 		$items   = array('公開日順', '更新日順');
 		foreach ( $items as $item ) {
-			echo '<label><input' . checked($current, $item, false) . ' value="' . esc_attr($item) . '" name="simple_oshirase_options[sos_orderby]" type="radio" /> ' . esc_html($item) . '</label><br />';
+			echo '<label><input' . checked($current, $item, false) . ' value="' . esc_attr($item) . '" name="oshiic_options[sos_orderby]" type="radio" /> ' . esc_html($item) . '</label><br />';
 		}
 	}
 
 	public function setting_number() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$value   = isset($options['sos_number']) ? absint($options['sos_number']) : 10;
-		echo '<input id="sos_number" name="simple_oshirase_options[sos_number]" size="2" type="number" min="1" max="30" value="' . esc_attr($value) . '" />件';
+		echo '<input id="sos_number" name="oshiic_options[sos_number]" size="2" type="number" min="1" max="30" value="' . esc_attr($value) . '" />件';
 	}
 
 	public function setting_newmark() {
-		$options = SOS::get_option();
+		$options = OSHIIC::get_option();
 		$value   = isset($options['sos_newmark']) ? absint($options['sos_newmark']) : 7;
-		echo '<input id="sos_newmark" name="simple_oshirase_options[sos_newmark]" size="2" type="number" min="0" max="30" value="' . esc_attr($value) . '" />日間';
+		echo '<input id="sos_newmark" name="oshiic_options[sos_newmark]" size="2" type="number" min="0" max="30" value="' . esc_attr($value) . '" />日間';
 	}
 
 	public function setting_latest_new() {
-		$options = SOS::get_option();
-		echo '<input id="sos_latest_new" name="simple_oshirase_options[sos_latest_new]" type="checkbox" value="1"' . checked( ! empty($options['sos_latest_new']), true, false ) . ' />';
+		$options = OSHIIC::get_option();
+		echo '<input id="sos_latest_new" name="oshiic_options[sos_latest_new]" type="checkbox" value="1"' . checked( ! empty($options['sos_latest_new']), true, false ) . ' />';
 		echo '<label for="sos_latest_new"> 最新の1件にNEW!マークをつける</label>';
 	}
 
 	public function setting_pagination() {
-		$options = SOS::get_option();
-		echo '<input id="sos_pagination" name="simple_oshirase_options[sos_pagination]" type="checkbox" value="1"' . checked( ! empty($options['sos_pagination']), true, false ) . ' />';
+		$options = OSHIIC::get_option();
+		echo '<input id="sos_pagination" name="oshiic_options[sos_pagination]" type="checkbox" value="1"' . checked( ! empty($options['sos_pagination']), true, false ) . ' />';
 		echo '<label for="sos_pagination"> 「前へ / 次へ」ボタンを表示する</label>';
 	}
 
 	public function setting_shortcode() {
-		$options = SOS::get_option();
-		$current = isset($options['sos_shortcode']) ? $options['sos_shortcode'] : SOS::SHORTCODE_NEW;
+		$options = OSHIIC::get_option();
+		$current = isset($options['sos_shortcode']) ? $options['sos_shortcode'] : OSHIIC::SHORTCODE_NEW;
 
-		echo '<label><input' . checked($current, SOS::SHORTCODE_NEW, false) . ' value="' . esc_attr(SOS::SHORTCODE_NEW) . '" name="simple_oshirase_options[sos_shortcode]" type="radio" /> <code>[shirase]</code>（推奨）</label><br />';
-		echo '<label><input' . checked($current, SOS::SHORTCODE_COMPAT, false) . ' value="' . esc_attr(SOS::SHORTCODE_COMPAT) . '" name="simple_oshirase_options[sos_shortcode]" type="radio" /> <code>[showwhatsnew]</code>（旧互換）</label>';
+		echo '<label><input' . checked($current, OSHIIC::SHORTCODE_NEW, false) . ' value="' . esc_attr(OSHIIC::SHORTCODE_NEW) . '" name="oshiic_options[sos_shortcode]" type="radio" /> <code>[shirase]</code>（推奨）</label><br />';
+		echo '<label><input' . checked($current, OSHIIC::SHORTCODE_COMPAT, false) . ' value="' . esc_attr(OSHIIC::SHORTCODE_COMPAT) . '" name="oshiic_options[sos_shortcode]" type="radio" /> <code>[showwhatsnew]</code>（旧互換）</label>';
 
-		if ( $current === SOS::SHORTCODE_COMPAT ) {
+		if ( $current === OSHIIC::SHORTCODE_COMPAT ) {
 			echo '<div class="sos-compat-warning" style="margin-top:8px; padding:10px 14px; background:#fff3cd; border-left:4px solid #f0ad4e; border-radius:2px;">';
 			echo '<strong>⚠️ 注意：</strong>「What\'s New Generator」プラグインが有効になっていると <code>[showwhatsnew]</code> が衝突します。<br>';
 			echo '<strong>必ずそちらを先に無効化してから</strong>、このショートコードを使用してください。';
